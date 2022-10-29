@@ -1,0 +1,136 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+ul li {
+	list-style: none;
+}
+
+
+
+.wrapper {
+   width: 100%;
+	min-height: 100vh;
+   padding: 10px;
+}
+.pizza__container{
+   max-width: 1000px;
+	margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   overflow: hidden;
+}
+
+
+/*top -----------------------------------------------------------------------------------------------*/
+.pizza__top {
+   display: flex;
+   width: 100%;
+}
+.pizza__column {
+   flex: 0 0 50%;
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+}
+.pizza__column--1 {
+   background-color: rgb(224, 221, 26);
+}
+.pizza__column--2 {
+   background-color: rgb(216, 215, 152);
+   align-items: center;
+}
+.pizza__title {
+   font-size: 25px;
+   font-weight: 700;
+   margin:0px 0px 20px 0px;
+
+}
+.pizza__list {
+   flex: 1 1 auto;
+   overflow: auto;
+}
+.pizza__item {
+   font-size: 20px;
+   font-weight: 500;
+   cursor: pointer;
+}
+.pizza__item:hover{
+   color:rgb(219, 13, 13);
+}
+.pizza__prices {
+   font-size: 20px;
+   font-weight: 500;
+   margin: 15px 0px 0px 0px;
+}
+.pizza__image {
+   flex: 1 1 auto;
+   max-width: 200px;
+   margin:0px 0px 10px 0px;
+}
+.pizza__image img {
+   max-width: 100%;
+}
+.pizza__btn {
+   cursor: pointer;
+   background-color: rgb(255, 136, 0);
+   height: 30px;
+   padding: 0 40px;
+   text-transform: uppercase;
+}
+.pizza__btn:hover{
+   background-color: rgb(202, 122, 31);
+}
+
+/*bottom -----------------------------------------------------------------------------------------------*/
+.pizza__bottom {
+   display: flex;
+   flex-wrap: wrap;
+   background-color: rgb(250, 224, 110);
+   width: 100%;
+   justify-content: space-around;
+}
+
+.ingredients-pizza {
+   text-align: center;
+   margin: 0 5px;
+}
+.ingredients-pizza__label {
+   font-size: 25px;
+   font-weight: 700;
+}
+.ingredients-pizza__list {
+   margin: 5px 0px 0px 0px;
+}
+.ingredients-pizza__list li {
+   margin:0px 0px 5px 0px;
+}
+.ingredients-pizza__item {
+   font-size: 18px;
+   font-weight: 500;
+   cursor: pointer;
+}
+
+.ingredients-pizza__item:hover{
+   color: rgb(138, 92, 0);
+}
+
+
+/*adaptiv-----------------------------------------------------------*/
+
+@media (max-width:505px) {
+   .pizza__top {
+      display: block;
+   }
+   .pizza__bottom {
+      display: block;
+   }
+}
