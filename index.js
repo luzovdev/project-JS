@@ -1,65 +1,61 @@
-const ingridientLists = document.querySelectorAll('.ingredients-pizza__list');
-const orderList = document.querySelector('.pizza__list');
-const orderBtn = document.querySelector('.pizza__btn');
+const ingredientsLists = document.querySelectorAll('.ingredients-pizza__list'),
+   ingredients = document.querySelectorAll('.ingredients-pizza__item'),
+   orderList = document.querySelector('.pizza__list'),
+   orderBtn = document.querySelector('.pizza__btn'),
+   imageWrapper = document.querySelector('.pizza__image');
 
 
 
 
-
-function showOrders(item) {
+function addToOrderList(ingredient) {
    let li = document.createElement('li');
-   li.innerText = `${item.textContent}`;
+   li.innerText = `${ingredient.textContent}`;
    orderList.append(li);
-   item.style.color = 'rgb(170, 29, 29)';
 }
 
 
-ingridientLists.forEach((item) => {
-   let ingridientList = item;
-   let countOfClicked = 0;
+function addImage(imageBlock, part) {
+   let img = document.createElement('img');
+   img.classList.add('pizza__image-item');
+   let imgSrc = ['img/1.png', 'img/2.png', 'img/3.png', 'img/4.png'];
+   img.src = imgSrc[part];
+   imageBlock.append(img);
+}
 
-   ///------------------------
-   function addIngridient(event) {
-      let ingredientToAdd = event.target;
 
-      if (ingredientToAdd !== this) {
-         showOrders(ingredientToAdd);
-      }
+/*Adding Ingredients */
 
-      if (ingredientToAdd.closest('.osnova') || ingredientToAdd.closest('.sous')) {
-         this.classList.add('oneClick');
-         if (ingredientToAdd.closest('.oneClick')) {
-            this.removeEventListener('click', addIngridient);
+const addingIngredients = function (ingredientsLists) {
+
+   for (let ingredientsList of ingredientsLists) {
+      ingredientsList.addEventListener('click', function (event) {
+
+         const ingredietnToAdd = event.target;
+         // let itemsOfIngredientList = this.children;
+         if (ingredietnToAdd.classList.contains('ingredients-pizza__item')) {
+            ingredietnToAdd.classList.add('checked');
+            addToOrderList(ingredietnToAdd);
+
+            if (this.classList.contains('one')) {
+               this.classList.add('lock');
+               console.log('one');
+            }
          }
-      }
+      });
    }
-   ///------------------------------
-   ingridientList.addEventListener('click', addIngridient);
+}
 
-})
-
-
-
-
-
-// // remove Ingridient
-// function removeIngridient(event) {
-//    let ingredientToRemove = event.target;
-//    if (ingredientToRemove !== this) {
-//       ingredientToRemove.remove();
-//    }
-// }
-// orderList.addEventListener('click', removeIngridient);
+addingIngredients(ingredientsLists);
 
 
 
 
 
 
+/*Removing Ingredients */
 
 
-
-
+/*calculate summ */
 
 
 
