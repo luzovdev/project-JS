@@ -7,6 +7,7 @@ const ingredientsLists = document.querySelectorAll('.ingredients-pizza__list'),
 
 
 
+
 function addToOrderList(ingredient) {
    let li = document.createElement('li');
    li.innerText = `${ingredient.textContent}`;
@@ -26,11 +27,12 @@ function addImage(imageBlock, part) {
 /*Adding Ingredients */
 
 const addingIngredients = function (ingredientsLists) {
-
+   let countOfImage = 0;
    for (let ingredientsList of ingredientsLists) {
       ingredientsList.addEventListener('click', function (event) {
 
          const ingredietnToAdd = event.target;
+
          // let itemsOfIngredientList = this.children;
          if (ingredietnToAdd.classList.contains('ingredients-pizza__item')) {
             ingredietnToAdd.classList.add('checked');
@@ -39,6 +41,12 @@ const addingIngredients = function (ingredientsLists) {
             if (this.classList.contains('one')) {
                this.classList.add('lock');
                console.log('one');
+            }
+
+            if (this.classList.contains('active') === false) {
+               this.classList.add('active');
+               addImage(imageWrapper, countOfImage);
+               countOfImage++;
             }
          }
       });
@@ -54,6 +62,39 @@ addingIngredients(ingredientsLists);
 
 /*Removing Ingredients */
 
+const removeIngredients = function () {
+
+   let orderItems = orderList.getElementsByTagName('li');
+   let ingredientsChecked = document.getElementsByClassName('ingredients-pizza__item checked');
+
+
+   orderList.addEventListener('click', function (event) {
+
+      for (let orderItem of orderItems) {
+         if (event.target === orderItem) {
+            for (itemChecked of ingredientsChecked) {
+               let ul = itemChecked.parentElement;
+
+               if (orderItem.textContent === itemChecked.textContent) {
+
+                  console.log(ul);
+                  //    if (//у ul нету у дочерних элементов нету класса ckeched){
+                  //       // то удалить active и удалить кусок пиццы
+                  //       //также отмотать стадию пиццы--
+                  //    } else {
+                  //    // удалить checked 
+                  //    // orderItem.remove
+                  // }
+               }
+            }
+
+         }
+      }
+   })
+}
+
+
+removeIngredients();
 
 /*calculate summ */
 
