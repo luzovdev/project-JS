@@ -18,16 +18,10 @@
                <ul class="pizza__list">
 
                </ul>
-               <div class="pizza__prices">Цена: <span id="price"></span></div>
+               <div class="pizza__prices">Цена: <span id="price">0$</span></div>
             </div>
             <div class="pizza__column pizza__column--2">
-               <div class="pizza__image">
-                  <!-- <img src="img/1.png" class="pizza__image-item" alt="">
-                  <img src="img/2.png" class="pizza__image-item" alt="">
-                  <img src="img/3.png" class="pizza__image-item" alt="">
-                  <img src="img/4.png" class="pizza__image-item" alt=""> -->
-
-               </div>
+               <div class="pizza__image" id="pizza__image"> </div>
                <button class="pizza__btn off">Заказать</button>
             </div>
          </div>
@@ -35,46 +29,46 @@
             <div class="pizza__ingredients ingredients-pizza">
                <div class="ingredients-pizza__label">Основа</div>
                <ul class="ingredients-pizza__list one">
-                  <li class="ingredients-pizza__item">Тонкое тесто</li>
-                  <li class="ingredients-pizza__item">Толстое тесто</li>
-                  <li class="ingredients-pizza__item">Сырный борт</li>
-                  <li class="ingredients-pizza__item">Комбинированная</li>
+                  <li class="ingredients-pizza__item" data-price="10">Тонкое тесто</li>
+                  <li class="ingredients-pizza__item" data-price="10">Толстое тесто</li>
+                  <li class="ingredients-pizza__item" data-price="10">Сырный борт</li>
+                  <li class="ingredients-pizza__item" data-price="10">Комбинированная</li>
                </ul>
             </div>
             <div class="pizza__ingredients ingredients-pizza ">
                <div class="ingredients-pizza__label ">Ингридиент 1</div>
                <ul class="ingredients-pizza__list">
-                  <li class="ingredients-pizza__item">Колбаски</li>
-                  <li class="ingredients-pizza__item">Шаминьоны</li>
-                  <li class="ingredients-pizza__item">Томаты</li>
-                  <li class="ingredients-pizza__item">Оливки</li>
+                  <li class="ingredients-pizza__item" data-price="2">Колбаски</li>
+                  <li class="ingredients-pizza__item" data-price="2">Шаминьоны</li>
+                  <li class="ingredients-pizza__item" data-price="2">Томаты</li>
+                  <li class="ingredients-pizza__item" data-price="2">Оливки</li>
                </ul>
             </div>
             <div class="pizza__ingredients ingredients-pizza  ">
                <div class="ingredients-pizza__label">Ингридиент 2</div>
                <ul class="ingredients-pizza__list">
-                  <li class="ingredients-pizza__item">Бекон</li>
-                  <li class="ingredients-pizza__item">Ветчина </li>
-                  <li class="ingredients-pizza__item">Моцарелла</li>
-                  <li class="ingredients-pizza__item">Перец</li>
+                  <li class="ingredients-pizza__item" data-price="2">Бекон</li>
+                  <li class="ingredients-pizza__item" data-price="2">Ветчина </li>
+                  <li class="ingredients-pizza__item" data-price="2">Моцарелла</li>
+                  <li class="ingredients-pizza__item" data-price="2">Перец</li>
                </ul>
             </div>
             <div class="pizza__ingredients ingredients-pizza">
                <div class="ingredients-pizza__label">Соус</div>
                <ul class="ingredients-pizza__list one">
-                  <li class="ingredients-pizza__item">Карри</li>
-                  <li class="ingredients-pizza__item">Барбекю</li>
-                  <li class="ingredients-pizza__item">Сырный</li>
-                  <li class="ingredients-pizza__item">Горчичный</li>
+                  <li class="ingredients-pizza__item" data-price="1">Карри</li>
+                  <li class="ingredients-pizza__item" data-price="1">Барбекю</li>
+                  <li class="ingredients-pizza__item" data-price="1">Сырный</li>
+                  <li class="ingredients-pizza__item" data-price="1">Горчичный</li>
                </ul>
             </div>
          </div>
       </div>
    </div>
-   <div class="modal none">
+   <div class="modal none" id="modal">
       <div class="modal__body">
-         <p class="modal__text"></p>
-         <button class="modal__btn">Заказать</button>
+         <p class="modal__text">Ваш Заказ успешно оформлен</p>
+         <button id="confirm-btn" class="modal__btn">Ок</button>
       </div>
    </div>
    <script src="index.js"></script>

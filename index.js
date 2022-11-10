@@ -2,10 +2,12 @@ const ingredientsLists = document.querySelectorAll('.ingredients-pizza__list'),
    ingredients = document.querySelectorAll('.ingredients-pizza__item'),
    orderList = document.querySelector('.pizza__list'),
    orderBtn = document.querySelector('.pizza__btn'),
-   imageWrapper = document.querySelector('.pizza__image');
+   imageWrapper = document.querySelector('.pizza__image'),
+   price = document.getElementById('price'),
+   modalWindow = document.getElementById('modal'),
+   confirmBtn = document.getElementById('confirm-btn');
 
-
-
+let totalPrice = 0;
 
 
 function addToOrderList(ingredient) {
@@ -25,78 +27,96 @@ function addImage(imageBlock, part) {
 
 
 /*Adding Ingredients */
+let images = imageWrapper.children;
+let countOfImage = images.length;
 
-const addingIngredients = function (ingredientsLists) {
-   let countOfImage = 0;
-   for (let ingredientsList of ingredientsLists) {
-      ingredientsList.addEventListener('click', function (event) {
+function addingIngredients(event) {
+   const ingredietnToAdd = event.target;
+   if (ingredietnToAdd.classList.contains('ingredients-pizza__item')) {
+      if (!ingredietnToAdd.classList.contains('checked')) {
+         ingredietnToAdd.classList.add('checked');
+         addToOrderList(ingredietnToAdd);
+         calculatePricePlus(ingredietnToAdd);
+      }
+      if (this.classList.contains('one')) {
+         this.classList.add('lock');
+      }
+      if (!this.classList.contains('active') && countOfImage !== 4) {
+         this.classList.add('active');
+         addImage(imageWrapper, countOfImage);
+         countOfImage++;
+      }
+   }
 
-         const ingredietnToAdd = event.target;
-
-         // let itemsOfIngredientList = this.children;
-         if (ingredietnToAdd.classList.contains('ingredients-pizza__item')) {
-            ingredietnToAdd.classList.add('checked');
-            addToOrderList(ingredietnToAdd);
-
-            if (this.classList.contains('one')) {
-               this.classList.add('lock');
-               console.log('one');
-            }
-
-            if (this.classList.contains('active') === false) {
-               this.classList.add('active');
-               addImage(imageWrapper, countOfImage);
-               countOfImage++;
-            }
-         }
-      });
+   if (countOfImage === 4) {
+      orderBtn.classList.remove('off')
    }
 }
 
-addingIngredients(ingredientsLists);
-
-
-
+for (let ingredientsList of ingredientsLists) {
+   ingredientsList.addEventListener('click', addingIngredients);
+}
 
 
 
 /*Removing Ingredients */
+let orderItems = orderList.getElementsByTagName('li');
+let ingredientsChecked = document.getElementsByClassName('ingredients-pizza__item checked');
 
-const removeIngredients = function () {
+function removeIngredients(event) {
+   for (let orderItem of orderItems) {
+      if (event.target === orderItem) {
+         for (itemChecked of ingredientsChecked) {
+            let ul = itemChecked.parentElement;
+            let ulChildrens = [...ul.children];
+            let liWithChecked = ulChildrens.filter(li => li.classList.contains('checked'));
+            if (orderItem.textContent === itemChecked.textContent) {
 
-   let orderItems = orderList.getElementsByTagName('li');
-   let ingredientsChecked = document.getElementsByClassName('ingredients-pizza__item checked');
-
-
-   orderList.addEventListener('click', function (event) {
-
-      for (let orderItem of orderItems) {
-         if (event.target === orderItem) {
-            for (itemChecked of ingredientsChecked) {
-               let ul = itemChecked.parentElement;
-
-               if (orderItem.textContent === itemChecked.textContent) {
-
-                  console.log(ul);
-                  //    if (//у ul нету у дочерних элементов нету класса ckeched){
-                  //       // то удалить active и удалить кусок пиццы
-                  //       //также отмотать стадию пиццы--
-                  //    } else {
-                  //    // удалить checked 
-                  //    // orderItem.remove
-                  // }
+               if (liWithChecked.length === 1) {
+                  ul.classList.remove('active');
+                  ul.classList.remove('lock');
+                  orderItem.remove();
+                  itemChecked.classList.remove('checked');
+                  countOfImage--;
+                  imageWrapper.lastChild.remove();
+                  orderBtn.classList.add('off');
+                  calculatePriceMinus(itemChecked);
+               } else {
+                  itemChecked.classList.remove('checked');
+                  orderItem.remove();
+                  calculatePriceMinus(itemChecked);
                }
             }
-
          }
       }
-   })
+   }
+}
+orderList.addEventListener('click', removeIngredients)
+
+/*calculate summ */
+
+const calculatePricePlus = function (ing) {
+   totalPrice += +ing.dataset.price
+   price.innerText = `${totalPrice}$`;
+}
+const calculatePriceMinus = function (ing) {
+   totalPrice -= +ing.dataset.price
+   price.innerText = `${totalPrice}$`;
 }
 
 
-removeIngredients();
+/*show Modal */
+orderBtn.addEventListener('click', function () {
+   if (!orderBtn.classList.contains('off')) {
+      modalWindow.classList.remove('none');
+   }
+});
 
-/*calculate summ */
+modalWindow.addEventListener('click', function (event) {
+   if (event.target === confirmBtn) {
+      location.reload();
+   }
+})
 
 
 
