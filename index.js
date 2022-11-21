@@ -9,6 +9,15 @@ const ingredientsLists = document.querySelectorAll('.ingredients-pizza__list'),
 
 let totalPrice = 0;
 
+class OrderInfo {
+   constructor(ingredients, price) {
+      this.ingredients = ingredients;
+      this.price = price;
+   }
+}
+
+let orderArray = [];
+
 
 function addToOrderList(ingredient) {
    let li = document.createElement('li');
@@ -35,12 +44,16 @@ function addingIngredients(event) {
    if (ingredietnToAdd.classList.contains('ingredients-pizza__item')) {
       if (!ingredietnToAdd.classList.contains('checked')) {
          ingredietnToAdd.classList.add('checked');
+         orderArray.push(ingredietnToAdd.textContent);
          addToOrderList(ingredietnToAdd);
          calculatePricePlus(ingredietnToAdd);
       }
       if (this.classList.contains('one')) {
          this.classList.add('lock');
       }
+      //Сделать чтобы можно было бы кликать не более 2х раз
+
+
       if (!this.classList.contains('active') && countOfImage !== 4) {
          this.classList.add('active');
          addImage(imageWrapper, countOfImage);
@@ -56,7 +69,6 @@ function addingIngredients(event) {
 for (let ingredientsList of ingredientsLists) {
    ingredientsList.addEventListener('click', addingIngredients);
 }
-
 
 
 /*Removing Ingredients */
@@ -81,9 +93,12 @@ function removeIngredients(event) {
                   imageWrapper.lastChild.remove();
                   orderBtn.classList.add('off');
                   calculatePriceMinus(itemChecked);
+                  orderArray.splice(orderArray.indexOf(orderItem.textContent), 1);
+                  console.log();
                } else {
                   itemChecked.classList.remove('checked');
                   orderItem.remove();
+                  orderArray.splice(orderArray.indexOf(orderItem.textContent), 1);
                   calculatePriceMinus(itemChecked);
                }
             }
@@ -91,7 +106,7 @@ function removeIngredients(event) {
       }
    }
 }
-orderList.addEventListener('click', removeIngredients)
+orderList.addEventListener('click', removeIngredients);
 
 /*calculate summ */
 
@@ -109,6 +124,8 @@ const calculatePriceMinus = function (ing) {
 orderBtn.addEventListener('click', function () {
    if (!orderBtn.classList.contains('off')) {
       modalWindow.classList.remove('none');
+      let orderInfo = new OrderInfo(orderArray, totalPrice);
+      console.log(orderInfo);
    }
 });
 
@@ -116,7 +133,7 @@ modalWindow.addEventListener('click', function (event) {
    if (event.target === confirmBtn) {
       location.reload();
    }
-})
+});
 
 
 
