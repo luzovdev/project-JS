@@ -12,22 +12,26 @@ ul li {
 	list-style: none;
 }
 
+html,
+body {
+	height: 100%;
+}
+
 
 
 
 .wrapper {
    overflow: hidden;
 	min-height: 100%;
-   padding: 10px;
-   
+   width: 100%;   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(143, 143, 143);
 }
 .pizza__container{
-   max-width: 1000px;
+   width: 1000px;
 	margin: 0 auto;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
    overflow: hidden;
 }
 

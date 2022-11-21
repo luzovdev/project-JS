@@ -51,7 +51,6 @@ function addingIngredients(event) {
       if (this.classList.contains('one')) {
          this.classList.add('lock');
       }
-      //Сделать чтобы можно было бы кликать не более 2х раз
 
 
       if (!this.classList.contains('active') && countOfImage !== 4) {
@@ -113,11 +112,11 @@ orderList.addEventListener('click', removeIngredients);
 const calculatePricePlus = function (ing) {
    totalPrice += +ing.dataset.price
    price.innerText = `${totalPrice}$`;
-}
+};
 const calculatePriceMinus = function (ing) {
    totalPrice -= +ing.dataset.price
    price.innerText = `${totalPrice}$`;
-}
+};
 
 
 /*show Modal */
